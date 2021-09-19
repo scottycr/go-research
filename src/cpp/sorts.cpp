@@ -38,9 +38,9 @@ void swap(int *x, int *y) {
     *y = tmp;
 }
 
-void bubbleSort(int set[MAXSET], int len) {
-    for (int i=0; i<len-1; i++) {
-        for (int j=0; j<len-i-1; j++) {
+void bubbleSort(int set[MAXSET]) {
+    for (int i=0; i<MAXSET-1; i++) {
+        for (int j=0; j<MAXSET-i-1; j++) {
             if (set[j] > set[j+1]) {
                 swap(&set[j], &set[j+1]);
             }
@@ -72,18 +72,19 @@ void quickSort(int (&set)[MAXSET], int start, int end) {
 
 void runSorts() {
     // C style arrays are faster to sort than the STL Array or Vector class, at least on my machine.
+    // Also, Go's arrays are similar to C's arrays.
     // Since I am benchmarking here, I will stick with the data structure that gives me the best results.
     int set[MAXSET];
     initSet(set);
     clock_t start, end;
     
+    std::cout << "[Bubble Sort]\n" << std::endl;
     std::cout << "Unsorted:" << std::endl;
     printElements(set);
 
-    std::cout << "[Bubble Sort]\n" << std::endl;
     std::cout << "Sorted:" << std::endl;
     start = clock();
-    bubbleSort(set, MAXSET);
+    bubbleSort(set);
     end = clock();
     printElements(set);
     printExecutionTime(start, end);
